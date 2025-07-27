@@ -45,3 +45,31 @@ exit 1
 fi
 
 echo "Tests passed. Proceeding with push"
+
+=========================================
+This is the yml file:
+
+name: CI
+
+on:
+pull_request:
+branches: [ main ]
+
+jobs:
+test:
+runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # or whatever version you use
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
